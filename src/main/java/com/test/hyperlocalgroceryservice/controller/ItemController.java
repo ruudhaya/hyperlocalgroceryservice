@@ -17,8 +17,7 @@ class ItemController {
     private ItemService itemService;
 
     @GetMapping("/items")
-    public List<Item> getAllItems(Model map) {
-        List<Item> products = itemService.getAllItems();
-        return products;
+    public Iterable<Item> getAllItems(Model map) {
+        return itemService.getAllItems();
     }
 }

@@ -21,30 +21,34 @@ public class HyperlocalgroceryserviceApplication {
 		SpringApplication.run(HyperlocalgroceryserviceApplication.class, args);
 	}
 
-	@Bean
-	CommandLineRunner init(ItemRepository itemRepository) throws IOException, ParseException {
-
+	private static void importItems(ItemRepository itemRepository) throws IOException, ParseException {
 		String resourceName = "items.json";
 
 		Object obj = new JSONParser().parse(new FileReader(resourceName));
 		JSONObject jo = (JSONObject) obj;
 		JSONArray ja = (JSONArray) jo.get("Data");
+
 		Iterator itr2 = ja.iterator();
 		while (itr2.hasNext())
 		{
 			JSONObject singleItem = (JSONObject) itr2.next();
-			Item anItem = new Item(singleItem.get("name").toString());
+			Item anItem = new Item(
+					singleItem.get("name").toString(),
+					Float.valueOf(singleItem.get("mrp").toString()),
+					Float.valueOf(singleItem.get("weightInGms").toString()),
+					Integer.valueOf(singleItem.get("quantity").toString()),
+					Float.valueOf(singleItem.get("discountPercent").toString()),
+					Integer.valueOf(singleItem.get("availableQuantity").toString()));
 			itemRepository.save(anItem);
 		}
 
-//			Stream.of("John", "Julie", "Jennifer", "Helen", "Rachel").forEach(itemObj -> {
-//				String name = ((JSONObject)itemObj).getString("name");
-//
-//				Item anItem = new Item(name);
-//				itemRepository.save(user);
-//			});
+		itemRepository.findAll().forEach(System.out::println);
+	}
 
-			itemRepository.findAll().forEach(System.out::println);
+	@Bean
+	CommandLineRunner init(ItemRepository itemRepository) throws IOException, ParseException {
+
+		importItems(itemRepository);
 
 		return null;
 	}

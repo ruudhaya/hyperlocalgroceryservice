@@ -34,7 +34,7 @@ public class HyperlocalgroceryserviceApplication {
 			JSONObject singleItem = (JSONObject) itr2.next();
 			Item anItem = new Item(
 					singleItem.get("name").toString(),
-					Float.valueOf(singleItem.get("mrp").toString()),
+					Float.valueOf(singleItem.get("mrp").toString())/100,
 					Float.valueOf(singleItem.get("weightInGms").toString()),
 					Integer.valueOf(singleItem.get("quantity").toString()),
 					Float.valueOf(singleItem.get("discountPercent").toString()),

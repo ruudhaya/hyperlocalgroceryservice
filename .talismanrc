@@ -1,4 +1,6 @@
 fileignoreconfig:
 - filename: src/main/java/com/test/hyperlocalgroceryservice/HyperlocalgroceryserviceApplication.java
   checksum: d67241091d7efcd2eb337ad431b73812550b3882311d77d2fef32f5448128c55
+- filename: src/main/java/com/test/hyperlocalgroceryservice/model/Customer.java
+  checksum: e75b148dfa16400427e9d070d7875d37c441a3e2a1a77ac191b6afe59b1a16fb
 version: "1.0"
